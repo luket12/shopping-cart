@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var Schema = mongoose.Schema();
+var Schema = mongoose.Schema;
 
 var schema = new Schema({
     imagePath: {type: String, required: true},
@@ -10,4 +10,4 @@ var schema = new Schema({
     
 });
 
-model.exports = mongoose.model('Product', schema);
+module.exports = mongoose.model('Product', schema);
