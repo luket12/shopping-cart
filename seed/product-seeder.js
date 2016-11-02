@@ -44,7 +44,7 @@ var products = [
     new Product({
         imagePath:  'https://i.kinja-img.com/gawker-media/image/upload/s--xVxWhhGD--/c_fit,fl_progressive,q_80,w_636/19alnfjort4gnjpg.jpg',
         title: 'Penuss finders',
-        description: 'Really Really goood',
+        description: 'Really Really good',
         price: 14      
     }),
 ];
