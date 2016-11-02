@@ -1,8 +1,14 @@
-var model = require('../models/product');
+
+var Product = require('../models/product');
+
 
 var mongoose = require('mongoose');
 
-mongoose.connect('localhost:27017/shopping');
+// Connect to MongoDB shopping collection
+mongoose.connect('mongodb://localhost/shopping', function(err) {
+    // Callback to check connection state, 2 is connecting 3 is connected
+    console.log(mongoose.connection.readyState);
+});
 
 var products = [
     new Product({
@@ -47,6 +53,7 @@ var done = 0;
 
 for (var i=0; i < products.length; i++) {
     products[i].save(function(err, result) {
+
         done++;
         if (done === products.length) {
             exit();
@@ -54,6 +61,8 @@ for (var i=0; i < products.length; i++) {
     });
 }
 
+// Disconnect from MongoDB Server
 function exit() {
+    console.log("Disconnecting")
     mongoose.disconnect();
 }
