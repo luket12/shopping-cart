@@ -13,3 +13,20 @@ passport.deserializeUser(function(id, done) {
         done(err, user);
     });
 });
+
+passport.use('local.signup', new localStrategy({
+    _usernameField: 'email',
+    _passwordField: 'password'
+}), function(req, res, email, password, done) {
+    User.findOne({email: email}, function(err, user) {
+        if (err) {
+            return done(err)
+        }
+        if (user) {
+            return done(null, false, {message: "Email In Use"})
+        }
+        var newUser = new User();
+        newUser.email = email;
+        newUser.password = password;
+    });
+});
