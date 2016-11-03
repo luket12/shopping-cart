@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var passport = require('passport');
+
 // Get products
 var products = require('../models/product');
 
@@ -28,8 +30,10 @@ router.get('/user/signup', function(req,res, next) {
     res.render('user/signup', {csrfToken: req.csrfToken()});
 });
 
-router.post('/user/signup', function(req,res,next) {
-   res.redirect('/');
-});
+router.post('/user/signup', passport.authenticate('local.signup', {
+    successRedirect: '/profile',
+    failureRedirect: '/',
+    failureFlash: true
+}));
 
 module.exports = router;
