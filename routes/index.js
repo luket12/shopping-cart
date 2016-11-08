@@ -6,6 +6,7 @@ var passport = require('passport');
 // Get products
 var products = require('../models/product');
 
+
 // Start CSRF Secuirity
 var csrf = require('csurf');
 var csurfProtection = csrf();
@@ -31,13 +32,18 @@ router.get('/user/signup', function(req,res, next) {
 });
 
 router.post('/user/signup', passport.authenticate('local.signup', {
-    successRedirect: '/profile',
+    successRedirect: '/user/profile',
     failureRedirect: '/',
+    failWithError: true,
     failureFlash: true
 }));
 
 router.get('/user/profile', function(req, res, next) {
     res.render('user/profile');
+});
+
+router.get('/loginfail', function(req, res){
+    res.jsonp(403, {message: 'Invalid username/password'});
 });
 
 module.exports = router;
