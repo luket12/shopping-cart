@@ -16,6 +16,8 @@ beforeEach(function(done) {
         return done();
     }
     if (mongoose.connection.readyState === 0) {
+        // Log
+        console.log("#Connecting to DB");
         mongoose.connect(config.db.test, function(err) {
             if (err) {
                 throw err;
@@ -28,6 +30,7 @@ beforeEach(function(done) {
 });
 
 afterEach(function(done) {
+    console.log("#Disconnecting from DB");
     mongoose.disconnect();
     return done();
 });
