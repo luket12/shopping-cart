@@ -11,12 +11,12 @@ process.env.NODE_ENV = 'test';
 beforeEach(function(done) {
     function clearDB() {
         for (var i in mongoose.connection.collections) {
-            mongoose.connection.collections[i].remove(function() {});
+            mongoose.connection.collections[i].remove(function() {
+            });
         }
         return done();
     }
     if (mongoose.connection.readyState === 0) {
-        // Log
         console.log("#Connecting to DB");
         mongoose.connect(config.db.test, function(err) {
             if (err) {
@@ -28,6 +28,7 @@ beforeEach(function(done) {
         return clearDB();
     }
 });
+
 
 afterEach(function(done) {
     console.log("#Disconnecting from DB");

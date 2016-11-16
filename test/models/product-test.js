@@ -14,11 +14,22 @@ describe('Mongoose: Products Model', function() {
                 description: 'What a load of shit',
                 price: 55
             });
-            product.save(function(err) {
+
+            var savedID;
+            product.save(function(err, res, done) {
                 // Confirm No error
                 should.not.exist(err);
-                // Verify User information is legitimate
-                // Should Testing Here
+
+                // Store ID reference to test
+                savedID = res.id;
+                done();
+            });
+
+            // Verify User information is legitimate
+            var saved = prod.findById(savedID, function(err, done) {
+                if (err)
+                    return err;
+                console.log(saved);
             });
             done();
         });
